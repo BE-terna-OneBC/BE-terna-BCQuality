@@ -174,6 +174,12 @@ and merge the desired upstream branch or content tag. Resolve conflicts and
 review the resulting policy before publishing or reinstalling your fork.
 Do not overwrite the fork wholesale with an upstream download.
 
+The BE-terna fork runs [Sync upstream fork](../.github/workflows/sync-upstream.yml)
+on GitHub Actions every Monday at 03:00 Europe/Berlin time, including daylight
+saving changes. It syncs `main` from `microsoft/BCQuality` without forcing or
+discarding fork changes. Conflicts fail the workflow and require manual
+resolution. The workflow can also be started manually from the Actions tab.
+
 For repeatable CI or runner use, select a tag or commit in a dedicated clean
 checkout and record `git rev-parse HEAD`. Upgrade deliberately, compare the
 old and new content, and rerun representative reviews. To roll back, select

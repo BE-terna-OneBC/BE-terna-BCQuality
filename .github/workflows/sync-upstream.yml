@@ -1,0 +1,26 @@
+name: Sync upstream fork
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+      timezone: Europe/Berlin
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'BE-terna-OneBC/BE-terna-BCQuality'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Sync main from Microsoft BCQuality
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh repo sync "$GH_REPO" --branch main --source microsoft/BCQuality
